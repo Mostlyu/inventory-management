@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Präsentation — Spickzettel</title>
+<style>
+  :root{
+    --bg:#f4f5f2; --panel:#ffffff; --ink:#16242b; --ink-2:#40515a; --ink-3:#6b7880;
+    --accent:#0c6b77; --accent-2:#0a555f; --tint:#e4efef; --warn:#a23a2b; --warn-tint:#f7eeea;
+    --rule:#dde1db;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#12191d; --panel:#1a2429; --ink:#e6ecec; --ink-2:#b3c0c4; --ink-3:#8598a0;
+      --tint:#16323a; --warn:#e0715f; --warn-tint:#2a1c1a; --rule:#2a3940; }
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:13.5px;line-height:1.42;}
+  .wrap{max-width:1000px;margin:0 auto;padding:1rem 1.1rem 2rem;}
+  header.top{border-bottom:2px solid var(--accent);padding-bottom:.5rem;margin-bottom:.7rem;}
+  h1{font-size:1.35rem;margin:0;}
+  .strat{font-size:.92rem;color:var(--ink-2);margin:.25rem 0 0;}
+  .strat b{color:var(--accent-2);}
+  .cols{column-count:2;column-gap:1.2rem;}
+  @media(max-width:720px){.cols{column-count:1;}}
+  .card{break-inside:avoid;background:var(--panel);border:1px solid var(--rule);border-radius:8px;
+        padding:.6rem .75rem;margin:0 0 .7rem;}
+  .card.warn{border-left:3px solid var(--warn);}
+  .card.go{border-left:3px solid var(--accent);}
+  h2{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-2);margin:0 0 .4rem;
+     display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;}
+  h2 .time{color:var(--ink-3);font-family:var(--mono);font-size:.66rem;font-weight:400;}
+  ul{margin:.2rem 0;padding-left:1.05rem;}
+  li{margin:.18rem 0;color:var(--ink-2);}
+  li b{color:var(--ink);}
+  .say{background:var(--tint);border-radius:5px;padding:.35rem .5rem;margin:.35rem 0;
+       font-style:italic;color:var(--ink);font-size:.9rem;}
+  .say::before{content:"🗣 ";font-style:normal;}
+  code{font-family:var(--mono);font-size:.82em;background:var(--tint);padding:.05em .3em;border-radius:3px;color:var(--accent-2);}
+  .q{color:var(--ink);font-weight:600;margin:.4rem 0 .1rem;}
+  .a{color:var(--ink-2);margin:0 0 .35rem;}
+  .chk li{list-style:none;position:relative;padding-left:1.1rem;}
+  .chk li::before{content:"☐";position:absolute;left:0;color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Inventory Management — Präsentations-Spickzettel</h1>
+  <p class="strat"><b>Strategie:</b> Kurz demonstrieren, dass es läuft — dann die meiste Zeit auf das <b>Warum</b>: die Analyse vor dem Code und 2–3 begründete Entscheidungen. Die App ist der Beweis, die Begründung ist die Präsentation.</p>
+</header>
+
+<div class="cols">
+
+  <div class="card go">
+    <h2>1 · Live-Demo <span class="time">~2 min</span></h2>
+    <ul>
+      <li>Kategorie anlegen → Artikel darin anlegen</li>
+      <li>Wareneingang <b>100</b>, Warenausgang <b>30</b> → Bestand <b>70</b></li>
+      <li>Ausgang &gt; Bestand versuchen → wird abgelehnt</li>
+      <li>Als <code>lager</code> einloggen → Anlegen ist gesperrt</li>
+    </ul>
+    <p class="say">Ich lege eine Kategorie an, dann einen Artikel. Ich buche 100 ein und 30 aus — der Bestand steht auf 70. Buche ich mehr aus als vorhanden ist, lehnt das System es ab.</p>
+  </div>
+
+  <div class="card">
+    <h2>2 · Übergang <span class="time">Schlüsselsatz</span></h2>
+    <p class="say">Das Interessante ist nicht die App selbst — CRUD kann jeder. Interessant ist, <b>wie</b> ich sie gebaut habe und <b>warum</b> ich mich für bestimmte Lösungen entschieden habe.</p>
+  </div>
+
+  <div class="card">
+    <h2>3 · Domäne <span class="time">~1 min</span></h2>
+    <p class="say">Das System verwaltet den Lagerbestand: Artikel, Kategorien und Ein- und Ausgänge — für ein Unternehmen mit vielen Produkten.</p>
+  </div>
+
+  <div class="card">
+    <h2>4 · Vorgehensweise <span class="time">~3 min · Diagramme zeigen</span></h2>
+    <p class="say">Ich habe nicht sofort losgecodet. Zuerst die fachliche Analyse, dann das Datenmodell, dann UML, dann die Architektur — erst danach Code.</p>
+    <ul>
+      <li><b>Analyse:</b> Entitäten vs. Attribute, User-Stories, Business-Regeln</li>
+      <li><b>Datenmodell:</b> Tabellen, Schlüssel, Beziehungen (ER-Diagramm zeigen)</li>
+      <li><b>UML:</b> Use-Case + Klassendiagramm zeigen</li>
+      <li><b>Architektur → Code → Validierung</b></li>
+    </ul>
+  </div>
+
+  <div class="card go">
+    <h2>5 · Kernentscheidung: Bestand <span class="time">wichtigste Story</span></h2>
+    <p class="say">Den Bestand speichere ich nicht als Spalte, sondern berechne ihn aus den Bewegungen. So kann er nie im Widerspruch zur Historie stehen. Ich tausche etwas Lesegeschwindigkeit gegen Korrektheit.</p>
+    <ul><li>Abwägung: <b>Performance</b> vs. <b>Konsistenz</b> vs. <b>Redundanz</b> → Konsistenz gewinnt</li></ul>
+  </div>
+
+  <div class="card go">
+    <h2>6 · Kernthema: Sicherheit</h2>
+    <p class="say">Alle Abfragen nutzen Prepared Statements gegen SQL-Injection. Passwörter speichere ich nur als Hash, nie im Klartext. Eingaben validiere ich serverseitig — man darf dem Client nie vertrauen. Rechte prüfe ich serverseitig, nicht nur in der Oberfläche.</p>
+  </div>
+
+  <div class="card">
+    <h2>7 · Architektur &amp; Regel</h2>
+    <p class="say">Die App ist in Schichten getrennt: Model, Repository, Controller, Template — jede mit genau einer Aufgabe. Das macht den Code wartbar.</p>
+    <p class="say">Die Regel „kein negativer Bestand" kommt aus der Analyse, steht im Aktivitätsdiagramm und wird im Controller durchgesetzt.</p>
+    <ul><li><b>Docker:</b> reproduzierbare Umgebung, auf jedem Rechner gleich</li></ul>
+  </div>
+
+  <div class="card">
+    <h2>8 · Reflexion <span class="time">~1 min</span></h2>
+    <p class="say">Ich hatte ein Dashboard gebaut, es aber wieder entfernt — es brachte keinen echten Mehrwert. Für den Produktivbetrieb würde ich den Seed-Admin entfernen und eine DB-Verbindungs-Wiederholung einbauen.</p>
+  </div>
+
+  <div class="card warn">
+    <h2>Unbedingt erwähnen ✓</h2>
+    <ul class="chk">
+      <li>Analyse <b>vor</b> dem Code</li>
+      <li>Bestand abgeleitet — mit Abwägung</li>
+      <li>Prepared Statements · Passwort-Hash · Server-Validierung · Rollen</li>
+      <li>Business-Regel: Analyse → Diagramm → Code</li>
+      <li>Schichten / Wartbarkeit</li>
+      <li>Docker · Scope bewusst gekürzt (Dashboard)</li>
+    </ul>
+  </div>
+
+  <div class="card warn">
+    <h2>Q&amp;A — vorbereitet</h2>
+    <p class="q">Warum abgeleiteter statt gespeicherter Bestand?</p>
+    <p class="a">Einzige Wahrheitsquelle — kann nie von der Historie abweichen. Nachteil: langsamer bei sehr vielen Bewegungen; dann würde man cachen.</p>
+    <p class="q">Warum ENUM für <code>type</code>, aber Tabelle für Kategorie?</p>
+    <p class="a">type = kleine feste Menge ohne eigene Daten (in/out) → ENUM. Kategorien haben eigene Daten und werden zur Laufzeit verwaltet → Tabelle.</p>
+    <p class="q">Warum Prepared Statements?</p>
+    <p class="a">Trennen Daten von SQL-Code — Eingaben können nie als Befehl ausgeführt werden.</p>
+    <p class="q">Warum kein Klartext-Passwort?</p>
+    <p class="a">Bei einem Datenleck wären alle sofort sichtbar. Hash ist einwegs; <code>password_verify</code> prüft ohne Entschlüsseln.</p>
+    <p class="q">Wo liegt der Fremdschlüssel?</p>
+    <p class="a">Auf der „viele"-Seite — ein FK ist ein einzelner Wert und zeigt auf sein eines Elternteil.</p>
+  </div>
+
+  <div class="card">
+    <h2>Nicht vergessen</h2>
+    <ul>
+      <li><b>App läuft schon</b> vor dem Start (<code>docker compose up -d</code>) — nie live debuggen</li>
+      <li>Diagramme offen: <code>docs/diagrams.md</code></li>
+      <li>Logins: <code>admin/admin123</code>, <code>lager/lager123</code></li>
+      <li>Demo kurz halten — bei Verzögerung weiterreden</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
